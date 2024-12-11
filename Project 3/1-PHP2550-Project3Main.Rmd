@@ -113,7 +113,6 @@ These expressions illustrate the overall variability in the data, which is compo
 For the Poisson outcome model, the cluster-level outcome is modeled on the logarithmic scale to ensure positivity, which is characteristic of count data. Each observation within a cluster is modeled as a Poisson random variable with a rate parameter determined by the cluster-level mean. The hierarchical structure is preserved by first modeling the cluster mean and then generating individual outcomes from that cluster-specific rate. This approach is useful in scenarios where outcomes are counts and are assumed to follow a Poisson distribution.
 
 1)  **Cluster-level mean:** The cluster-level rate parameter ($\mu_i$) is modeled on the logarithmic scale to ensure non-negativity:
-
 $$
 \log(\mu_i) = \alpha + \beta X_i + \epsilon_i \ where \ \epsilon_i \sim N(0, \gamma^2), \,
 \mu_i \sim \text{LogNormal}(\alpha + \beta X_i, \gamma^2)
@@ -161,7 +160,10 @@ Also, as of *Aim2*, to understand the impact of various parameters on the optima
     
   3) **Evaluate patterns and relationships**: Analyze how changes in cost structure and variance components contribute to changes in the optimal design. This helps us derive practical recommendations for designing cluster-randomized trials under varying budgetary and variance conditions.
 
-Note: The budget is fixed at $B = 4000$ for all analyses, which would allow us to better investigate the impact of the cost structure ($c_1/c_2$) or the variance parameters ($\sigma^2$, $\gamma^2$) on the optimal experimental design. This approach ensures that any changes observed in the optimal design are due to the variation in these parameters rather than changes in the overall resource availability. Additionally, we have only considered two values for $\beta$ (2 and 4), as our primary focus is on finding the optimal $G$ and $R$ combination that minimizes the variance of $\hat{\beta}$. Since the main goal is to achieve minimal variance, the specific value of $\beta$ itself is less critical in this analysis.
+Note: The budget is fixed at $B = 4000$ for all analyses, which would allow us to better investigate the impact of the cost structure ($c_1/c_2$) or the variance parameters ($\sigma^2$, $\gamma^2$) on the optimal experimental design. This approach ensures that any changes observed in the optimal design are due to the variation in these parameters rather than changes in the overall resource availability. Additionally, we have only considered two values for $\beta$ (2 and 4), as our primary focus is on finding the optimal $G$ and $R$ combination that minimizes the variance of $\hat{\beta}$. Since the main goal is to achieve minimal variance, the specific value of $\beta$ itself is less critical in this analysis. 
+
+Furthermore, the intercept parameter $\alpha$ is kept constant across all analyses. In the Normal case, $\alpha$ represents a baseline effect that does not influence the optimal allocation of $G$ and $R$ or the variance of $\hat{\beta}$. However, in the Poisson case, $\alpha$ impacts the overall variance due to the variance-mean relationship inherent to the Poisson distribution. Despite this, to better isolate the effects of parameters such as $c_1/c_2$, $\sigma^2$, $\gamma^2$, and $\beta$, and to avoid introducing additional complexity, $\alpha$ is held constant throughout the analyses. Since we are already varying $\beta$, keeping $\alpha$ fixed ensures consistency and comparability across scenarios.
+
 
 ## Performance Measures
 
