@@ -219,7 +219,7 @@ dist_plot <- ggplot(merged_main %>% filter(Age >= 15), aes(x = X.CR, fill = Gend
 dist_plot
 ```
 
-Relevant weather conditions of the 96 event dates were also provided. These are dry bulb temperature (Td, °C), wet bulb temperature (Tw, °C), percent relative humidity (%rh), black globe temperature (Tg, °C), solar radiation (SR, W/m$^2$), Dew Point (DP, °C), Wind speed (km/hr), and Wet Bulb Globe Temperature (WBGT,°C). WBGT was also categorized to 5 flag levels, quantifying risk of heat illness: White = WBGT <10C, Green = WBGT 10-18 °C, Yellow = WBGT >18-23 °C, Red = WBGT >23-28 °C, and Black = WBGT >28 °C. The air pollution concentrations of sulfur dioxide (parts per million), nitrogen dioxide (parts per million), ozone (parts per billion), and particular matter 2.5 ($\mu$g/m$^3$) were extracted from the EPA meta database using the `R` package `RAQSAPI`. SO$_2$, NO$_2$, and O$_3$ were derived from daily averages of 1-hour measurements, whereas PM$_{2.5}$ was based on a 24-hour monitoring.
+Relevant weather conditions of the 96 event dates were also provided. These are dry bulb temperature (Td, °C), wet bulb temperature (Tw, °C), percent relative humidity (%RH), black globe temperature (Tg, °C), solar radiation (SR, W/m$^2$), Dew Point (DP, °C), wind speed (km/hr), and Wet Bulb Globe Temperature (WBGT,°C). WBGT was also categorized to 5 flag levels, quantifying risk of heat illness: White = WBGT <10C, Green = WBGT 10-18 °C, Yellow = WBGT >18-23 °C, Red = WBGT >23-28 °C, and Black = WBGT >28 °C. The air pollution concentrations of sulfur dioxide (parts per million), nitrogen dioxide (parts per million), ozone (parts per billion), and particular matter 2.5 ($\mu$g/m$^3$) were extracted from the EPA meta database using the `R` package [`RAQSAPI`](https://github.com/USEPA/RAQSAPI). SO$_2$, NO$_2$, and O$_3$ were derived from daily averages of 1-hour measurements, whereas PM$_{2.5}$ was based on a 24-hour monitoring.
 
 Regarding the distribution of the environmental parameters, the small p-values across **Table 2** indicate significant differences in weather conditions and air quality among the five major marathons. Variables such as WBGT, wind speed, humidity, and pollutants like NO$_2$ and SO$_2$ demonstrate considerable variability across locations, highlighting the unique environmental contexts in which each race was conducted. These findings suggest that environmental conditions may play a role in influencing marathon performance, particularly across different regions. 
 
@@ -307,7 +307,7 @@ custom_labels <- c( "SO2 (ppb)", "NO2 (ppb)",
                     "Ozone (ppm)", "PM2.5 (microgram/m^3)",
                     "WBGT (°C)", "Wind Speed (km/hr)", "DP (°C)", 
                    "Td (°C)", "Tw (°C)", 
-                   "%rh", "Tg (°C)", "SR (W/m^2)")
+                   "%RH", "Tg (°C)", "SR (W/m^2)")
 
 
 cor_matrix <- cor(environ_data, use = "complete.obs", method = "spearman")
@@ -338,7 +338,7 @@ distinct_environ = CR_merged[, c("WBGT", "X.rh", "Wind","SR",
   distinct()
 
 custom_labels <- list(
-  "X.rh" = "% relative humidity",
+  "X.rh" = "% Relative Humidity",
   "Wind" = "Wind Speed",
   "WBGT" = "WBGT",
   "SR" = "SR",
@@ -529,7 +529,7 @@ combined_plot
 ```
 
 
-### The General Correlation between Environmental Fators and Marathon Performance for Both General and Top Runners
+### The General Correlation between Environmental Fators and Marathon Performance
 
 To explore the impact of environmental conditions on marathon performance, we started with analyzing the overall correlations between various environmental factors and these two performance metrics: net race time in all runners (n = 11564) and the course records in minutes for all race events for both genders (n = 192). The results are displayed in **Table 3**. Overall, the correlations are relatively low. Among the environmental factors, WBGT showed the highest positive correlation with both net race time and course record, indicating that higher WBGT is associated with slower performances. Conversely, wind speed, solar radiation, and % relative humidity displayed negative correlations, suggesting that higher values of these factors may slightly improve performance, although the effect sizes are small. Interestingly, while NO$_2$ showed a very weak positive correlation with net race time in all runners (r = 0.0022), it had a stronger negative correlation with the course record (r = -0.118). Similar opposite directional patterns were observed for PM$_{2.5}$ and solar radiation, suggesting that the association between environmental factors and marathon performance may vary depending on whether we consider the entire field of runners or focus specifically on top performers (course record setters). This differential effect highlights the need for tailored analyses when assessing environmental impacts on performance across different levels of competitiveness. 
 
@@ -537,7 +537,7 @@ To explore the impact of environmental conditions on marathon performance, we st
 cor_table <- data.frame(
   Environmental_Factor = environ_factors,
   NetRaceTime_Corr = NA,
-  ChipTime_Corr = NA
+  OffCR_Corr = NA
 )
 
 
@@ -551,18 +551,17 @@ for (i in seq_along(environ_factors)) {
                                        method = "spearman"), 4)
   
   # Correlation for ChipTime in records
-  cor_table$ChipTime_Corr[i] <- round(cor(CR_merged[[factor]], 
-                                    CR_merged$ChipTime, 
+  cor_table$OffCR_Corr[i] <- round(cor(merged_main[[factor]], 
+                                    merged_main$X.CR, 
                                     use = "complete.obs", 
                                     method = "spearman"), 4)
 }
 
-colnames(cor_table)[2:3] <- c("Net race time in all runners", "Course record")
-rownames(cor_table) <- c("WBGT", "%rh", "Wind Speed", "Solar Radiation", 
+colnames(cor_table)[2:3] <- c("Net Race Time", "% off Course Record")
+rownames(cor_table) <- c("WBGT", "% Relative Humidity", "Wind Speed", "Solar Radiation", 
                          "NO2", "SO2", "Ozone", "PM2.5")
 cor_table[, -1] %>%
-  kable(caption = "Spearman Correlation between Environmental Factors and Net Race Time 
-        for General Runners and Record Setters") %>%
+  kable(caption = "Spearman Correlation between Environmental Factors and Marathon Performance") %>%
     kableExtra::kable_styling(
     position = "center",
     latex_options = c("scale_down", "striped", "repeat_header"),
@@ -572,7 +571,7 @@ cor_table[, -1] %>%
 
 ```
 
-### The Impact of Environmental Fators on Marathon Performance for General Runners
+### The Impact of Environmental Fators on Marathon Performance
 
 **Figure 5** illustrates the impact of various environmental factors on marathon performance for all runners, stratified by gender. Across all environmental factors--including wind speed, WBGT, solar radiation, percent relative humidity, and air pollutants (Ozone, NO$_2$, SO$_2$, and PM$_{2.5}$)--the effect of gender appears minimal, with male and female runners exhibiting overlapping patterns. The impact of environmental conditions on performance is notably non-linear, with clear curvatures visible across several variables, particularly WBGT and percent relative humidity. These results suggest complex interactions between environmental factors and performance, but without a significant difference in gender-specific responses.
 
@@ -581,7 +580,7 @@ cor_table[, -1] %>%
 weather <- c("Wind", "WBGT", "SR", "X.rh")
 weather_titles <- c("Wind speed", "Wet Bulb Globe Temperature", 
             "Solar radiation ", "Percent relative humidity")
-units <- c(" (Km/hr)", " (°C)", " (W/m^2)", "")
+units <- c(" (Km/hr)", " (°C)", " (W/m^2)", "%")
 
 # Create a list of ggplot objects
 plots <- lapply(seq_along(weather), function(i) {
@@ -654,18 +653,61 @@ combined_plot
 
 Then, we further broke down the environmental impacts by both genders and age groups. Take the effects of WBGT and NO$_2$ as examples. For runners in the 20-59 year-old age groups, the two factors' influence on marathon performance appears to be minimal, as the regression line is nearly horizontal. In contrast, for both younger runners (15-19 years) and older runners (above 60 years), the relationship between WBGT or NO$_2$ and marathon performance seems more non-linear, with slight increases and decreases in performance with the increasing WBGT or increasing concentration of NO$_2$. Despite these age-specific trends, the overall patterns for men and women are similar, reiterating that gender does not significantly modify the relationship between environmental stressors and marathon performance. 
 
-```{r, fig.height = 3.5, fig.width = 9}
-ggplot(merged_main %>% filter(Age >= 15), aes(x = WBGT, y = X.CR, color = Gender)) +
-  geom_point(size = 0.3, alpha = 0.3) +
-  geom_smooth(method = "loess", se = TRUE, size = 0.75, color = "black") +
-  facet_grid(Gender~Age_Group) +
-  scale_color_manual(values = c("Male" = "steelblue", "Female" = "darkred")) +
-  scale_y_continuous(limits = c(0, 300)) +
-  labs(title = "Figure 6: the Impact of WBGT and NO2 on Marathon Performance for General Runners",
-       x = "WBGT (°C)", y = "Percent off current course record") +
-  theme_minimal() +
-  theme(legend.position = "none",
-        plot.title = element_text(size = 14, hjust = 0.5))
+```{r, fig.height = 10, fig.width = 12}
+# List of environmental factors, titles, and units
+factors <- c("WBGT", "Wind", "SR", "X.rh", "Ozone", "NO2", "SO2", "PM2.5")
+titles <- c(
+  "Wet Bulb Globe Temperature (°C)",
+  "Wind Speed (Km/hr)",
+  "Solar Radiation (W/m^2)",
+  "Percent Relative Humidity (%)",
+  "Ozone (ppm)",
+  "NO2 (ppb)",
+  "SO2 (ppb)",
+  "PM2.5 (microgram/m^3)"
+)
+
+# Create a list of ggplot objects for all environmental factors
+plots <- lapply(seq_along(factors), function(i) {
+  ggplot(merged_main %>% filter(Age >= 15), 
+         aes_string(x = factors[i], y = "X.CR", linetype = "Gender", color = "Age_Group")) +
+    geom_smooth(method = "loess", se = FALSE) +
+    scale_color_manual(values = c(
+      "15-19" = "pink", "20-29" = "steelblue", "30-39" = "darkgreen", 
+      "40-49" = "yellow", "50-59" = "darkorange", "60-69" = "purple", 
+      "70-79" = "darkred", ">= 80" = "black"
+    )) +
+    scale_linetype_manual(values = c("Female" = "dotted", "Male" = "solid")) +
+    labs(
+      title = titles[i],
+      x = factors[i],
+      y = if (i %in% c(1, 5)) "Percent off Current Course Record" else NULL
+    ) +
+    theme_minimal() +
+    theme(
+      legend.position = if (i %in% c(8)) "right" else "none", 
+      plot.title = element_text(size = 12, hjust = 0.5),
+      axis.title.y = element_text(size = if (i == 1) 12 else 0),
+      axis.text.y = element_text(size = if (i == 1) 10 else 0),
+      axis.title.x = element_blank()
+    )
+})
+
+# Combine the plots into a 2x4 grid
+combined_plot <- wrap_plots(plots, ncol = 4) & 
+  theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
+
+# Add a shared title and legend
+final_plot <- combined_plot + 
+  plot_annotation(
+    title = "Figure 6: Impact of Environmental Factors on Marathon Performance by Gender and Age Group",
+    theme = theme(plot.title = element_text(hjust = 0.5, size = 16))
+  ) & 
+  plot_layout(guides = "collect")
+
+# Display the final combined plot
+final_plot
+
 ```
 
 ```{r, fig.height = 3.3, fig.width = 9}
@@ -683,7 +725,7 @@ ggplot(merged_main %>% filter(Age >= 15), aes(x = NO2, y = X.CR, color = Gender)
 
 Note that due to data sparsity, runners with age <= 14 were not included in the LOESS plots. And, for clarity, the by-age-and-gender LOESS plots for the remaining six environmental factors can be found in the **Figure Appendix** section.
 
-Given the non-linearity of the data, generalized additive models (GAM) with a Gaussian family and log link was conducted to identify the most significant environmental factors. Note that to better visualize the results, the factors were analyzed on a standardized scale. The results presented in **Figure 7** and **Table 4** present the GAM results for general runners. Except for wind spped, the approximate p-values for other smooth terms of the GAM are very small, indicating strong statistical evidence of associations between these environmental factors and marathon performance (as measured by percent off the course record). 
+Given the non-linearity of the data, generalized additive models (GAM) with a Gaussian family and log link was conducted to identify the most significant environmental factors. Note that to better visualize the results, the factors were analyzed on a standardized scale. The results presented in **Figure 7** and **Table 4** present the GAM results for general runners. Except for wind speed, the approximate p-values for other smooth terms of the GAM are very small, indicating strong statistical evidence of associations between these environmental factors and marathon performance (as measured by percent off the course record). 
 
 However, the adjusted R$^2$ values and the percentage of deviance explained are consistently low, with adjusted R$^2$ values ranging from 0.13\% for percent relative humidity to a maximum of 0.78% for NO$_2$. Similarly, the percentage of deviance explained does not exceed 1% for any of the environmental factors, with most falling below 0.5%. In short, despite the statistical significance, the practical impacts (effect sizes) of these findings are minimal, meaning that their ability to explain variation in marathon performance is extremely limited. A Spline regression was also conducted to confirm the statistically significant but not practically meaningful association between environmenal factors and marathon performance. Corresponding supplemental figures with adjusted R$^2$ can be found in the **Figure Appendix** section.
 
@@ -692,7 +734,7 @@ std_environ_factors = c("Wind_s", "WBGT_s", "SR_s", "X.rh_s",
                         "Ozone_s", "SO2_s", "NO2_s", "PM2.5_s")
 
 std_x_labels <- list(
-  "X.rh_s" = "% relative humidity",
+  "X.rh_s" = "% Relative Humidity",
   "Wind_s" = "Wind Speed",
   "WBGT_s" = "WBGT",
   "SR_s" = "Solar Radiation",
@@ -704,7 +746,7 @@ std_x_labels <- list(
 
 # Wrapper funct to fit GAM, create plot, and extract adjusted R-squared
 create_gam_plot <- function(df, show_y_axis = TRUE, x_var, 
-                            y_var = "X.CR", ylab_text = "% off course record") {
+                            y_var = "X.CR", ylab_text = "% off Course Record") {
   
   # Filter out missing and non-finite values
   model_data <- df %>%
@@ -837,146 +879,6 @@ gam_results %>%
 
 ```
 
-### The Impact of Environmental Fators on Course Records
-
-To investigate the environmental effects on course records, we performed LOESS smoothing again. **Figure 8** reveals that the impact of environmental factors on course records tends to approach linearity, especially in comparison to the more complex and clear curvatures seen with net race times for general runners. Thus, for simplicity, this subsection employed a linear model controlled for gender to assess the environmental effects. 
-
-```{r, fig.width = 12, fig.height = 3.2}
-# List of pollutant variables and their labels
-weather <- c("Wind", "WBGT", "SR", "X.rh")
-weather_titles <- c("Wind speed", "Wet Bulb Globe Temperature", 
-            "Solar radiation ", "Percent relative humidity")
-units <- c(" (Km/hr)", " (°C)", " (W/m^2)", "")
-
-# Create a list of ggplot objects
-plots <- lapply(seq_along(weather), function(i) {
-  ggplot(CR_merged, aes_string(x = weather[i], y = "ChipTime" , color = "Gender")) +
-    geom_smooth(method = "loess", se = TRUE, size = 1) +
-    labs(
-      title = weather_titles[i],
-      x = paste0(weather[i], " ", units[i]),
-      # Only show y-axis label on the first plot
-      y = if (i == 1) "Course record (minute)" else NULL  
-    ) +
-    scale_color_manual(values = c("Male" = "steelblue", "Female" = "darkred")) +
-    theme_minimal() +
-    theme(
-      plot.title = element_text(hjust = 0.5, size = 14),
-      axis.title.x = element_text(size = 14),
-      # Hide y-axis title and text for non-row-leading plots
-      axis.title.y = element_text(size = if (i == 1) 14 else 0),  
-      axis.text.y = element_text(size = if (i == 1) 12 else 0), 
-      legend.position = if (i == 4) "right" else "none"
-    )
-})
-
-# Combine the four plots into a single row with shared y-axis
-combined_plot <- wrap_plots(plots, ncol = 4) & 
-  theme(plot.margin = unit(c(0.1, 0.1, 0.1, 0.1), "cm")) 
-
-combined_plot <- combined_plot + 
-  plot_annotation(
-    title = "Figure 8: Impact of Environmental Factors on Course Records by Gender using LOESS",
-    theme = theme(plot.title = element_text(hjust = 0.5, size = 18))  
-  )
-
-combined_plot
-```
-
-```{r, fig.width = 13, fig.height = 3}
-# List of pollutant variables and their labels
-pollutants <- c("Ozone", "NO2", "SO2", "PM2.5")
-titles <- c("Ozone", "NO2", "SO2", "PM2.5")
-units <- c(" (ppm)", " (ppb)", " (ppb)", "(microgram/m^3)")
-
-# Create a list of ggplot objects
-plots <- lapply(seq_along(pollutants), function(i) {
-  ggplot(CR_merged, aes_string(x = pollutants[i], y = "ChipTime" , color = "Gender")) +
-    geom_smooth(method = "loess", se = TRUE, size = 1) +
-    labs(
-      title = titles[i],
-      x = paste0(pollutants[i], " ", units[i]),
-      # Only show y-axis label on the first plot
-      y = if (i == 1) "Course record (minute)" else NULL  
-    ) +
-    scale_color_manual(values = c("Male" = "steelblue", "Female" = "darkred")) +
-    theme_minimal() +
-    theme(
-      plot.title = element_text(hjust = 0.5, size = 14),
-      axis.title.x = element_text(size = 14),
-      # Hide y-axis title and text for non-row-leading plots
-      axis.title.y = element_text(size = if (i == 1) 14 else 0),  
-      axis.text.y = element_text(size = if (i == 1) 12 else 0),
-      legend.position = if (i == 4) "right" else "none"
-    )
-})
-
-# Combine the four plots into a single row with shared y-axis
-combined_plot <- wrap_plots(plots, ncol = 4) & 
-  theme(plot.margin = unit(c(0.1, 0.1, 0.1, 0.1), "cm"))
-combined_plot
-```
-
-Notably, the gender variable alone explains nearly 88% of the variability in course records, leaving limited room for other factors to contribute meaningfully. While some environmental factors, such as solar radiation, SO$_2$, and O$_3$, are statistically significant (p < 0.05), the approximate isolated R$^2$ values (the difference between full-model R$^2$ and gender-only-model R$^2$) for these factors remain negligible, indicating that the practical influence of these environmental factors on course records is minimal despite their statistical significance. Interestingly, the betas for air pollutants, including NO$_2$, SO$2$, and PM${2.5}$, are negative, suggesting that higher air pollution levels are associated with better course records. This "counterintuitive" result is likely not a genuine relationship, as the R$^2$ values are below 1\%, indicating that this "negative" association may be spurious or driven by confounding factors.
-
-```{r}
-# Wrapper func to fit lm and extract summary statistics for the environmental variable
-fit_lm <- function(data, var) {
-  model <- lm(as.formula(paste("log(ChipTime) ~", var, "+ Gender")), data = data)
-  model_summary <- summary(model)
-  
-  # Extract beta, CI, p-value, and adjusted R-squared for the environmental variable
-  beta <- coef(model)[var]
-  ci <- confint(model)[var, ]
-  p_value <- coef(summary(model))[var, "Pr(>|t|)"]
-  adj_r2 <- model_summary$adj.r.squared
-  
-  return(data.frame(Variable = var,
-                    Beta = beta,
-                    CI_lower = ci[1],
-                    CI_upper = ci[2],
-                    P_value = p_value,
-                    Adj_R2 = adj_r2))
-}
-
-
-results <- list()
-
-# generate gender only R2
-gender_model <- lm(log(ChipTime) ~ Gender, data = CR_merged)
-gender_summary <- summary(gender_model)
-gender_adj_r2 <- gender_summary$adj.r.squared
-
-
-# Loop through the environmental variables
-for (var in std_environ_factors) {
-  results[[var]] <- fit_lm(CR_merged, var)
-}
-
-results_df <- bind_rows(results)
-rownames(results_df) <- c("WBGT", "%rh", "Wind Speed", "Solar Radiation", 
-                         "NO2", "SO2", "Ozone", "PM2.5")
-
-# Format the table
-results_df[,-1] %>%
-  mutate(P_value = round(P_value, 4),
-         Adj_R2 = paste0(round(Adj_R2- gender_adj_r2, 4)*100, "%"),
-         Beta = round(Beta, 4),
-         CI_lower = round(CI_lower, 4),
-         CI_upper = round(CI_upper, 4)) %>%
-  kable(caption = "Linear Model Results- log(Course Records) vs. Environmental Factors (Controlled for Gender)",
-        col.names = c("Standardized Var.", "Beta", "CI Lower", "CI Upper", "p-value", "Approxi. Isolated R²"),
-        linesep = c("","\\addlinespace"),
-        align = "c") %>%
-  kable_styling(full_width = FALSE,
-                latex_options = c("striped", "repeat_header"),
-                stripe_color = "gray!15",
-                font_size = 11,
-                position = "center")
-
-```
-
-
 
 ## \textcolor{orange}{CONCLUSION}
 
@@ -1003,88 +905,6 @@ Primary data were provided by Dr. Brett Romano Ely and Dr. Matthew Ely from the 
 \pagebreak
 # Figure Appendix
 
-### Supplemental LOESS plots for the impact of environmental factors on marathon performance by age and gender
-
-```{r, fig.height = 3.5, fig.width = 9}
-# Impact of environmental factors on performance by age and gender
-
-ggplot(merged_main %>% filter(Age >= 15), aes(x = SR, y = X.CR, color = Gender)) +
-  geom_point(size = 0.3, alpha = 0.3) +
-  geom_smooth(method = "loess", se = TRUE, size = 0.75, color = "black") +
-  facet_grid(Gender~Age_Group) +
-  scale_color_manual(values = c("Male" = "steelblue", "Female" = "darkred")) +
-  scale_y_continuous(limits = c(0, 300)) +
-  labs(title = "Figure S1: The Impact of Solar Radiation on Marathon Performance by Age and Gender",
-    x = "SR (W/m^2)", y = "Percent off current course record") +
-  theme_minimal() +
-  theme(legend.position = "none")
-```
-
-```{r, fig.height = 3.5, fig.width = 9}
-ggplot(merged_main %>% filter(Age >= 15), aes(x = X.rh, y = X.CR, color = Gender)) +
-  geom_point(size = 0.3, alpha = 0.3) +
-  geom_smooth(method = "loess", se = TRUE, size = 0.75, color = "black") +
-  facet_grid(Gender~Age_Group) +
-  scale_color_manual(values = c("Male" = "steelblue", "Female" = "darkred")) +
-  scale_y_continuous(limits = c(0, 300)) +
-  labs(title = "Figure S2: The Impact of Percent Relative Humidity on Marathon Performance by Age and Gender",
-    x = "%rh", y = "Percent off current course record") +
-  theme_minimal() +
-  theme(legend.position = "none")
-```
-
-```{r, fig.height = 3.5, fig.width = 9}
-ggplot(merged_main %>% filter(Age >= 15), aes(x = Wind, y = X.CR, color = Gender)) +
-  geom_point(size = 0.3, alpha = 0.3) +
-  geom_smooth(method = "loess", se = TRUE, size = 0.75, color = "black") +
-  facet_grid(Gender~Age_Group) +
-  scale_color_manual(values = c("Male" = "steelblue", "Female" = "darkred")) +
-  scale_y_continuous(limits = c(0, 300)) +
-  labs(title = "Figure S3: The Impact of Wind Speed on Marathon Performance by Age and Gender",
-    x = "Wind speed (km/hr)", y = "Percent off current course record") +
-  theme_minimal() +
-  theme(legend.position = "none")
-```
-
-```{r, fig.height = 3.5, fig.width = 9}
-ggplot(merged_main %>% filter(Age >= 15), aes(x = SO2, y = X.CR, color = Gender)) +
-  geom_point(size = 0.3, alpha = 0.3) +
-  geom_smooth(method = "loess", se = TRUE, size = 0.75, color = "black") +
-  facet_grid(Gender~Age_Group) +
-  scale_color_manual(values = c("Male" = "steelblue", "Female" = "darkred")) +
-  scale_y_continuous(limits = c(0, 300)) +
-  labs(title = "Figure S4: The Impact of SO2 on Marathon Performance by Age and Gender", 
-    x = "SO2 (ppm)", y = "Percent off current course record") +
-  theme_minimal() +
-  theme(legend.position = "none")
-```
-
-```{r, fig.height = 3.5, fig.width = 9}
-ggplot(merged_main %>% filter(Age >= 15), aes(x = Ozone_s, y = X.CR, color = Gender)) +
-  geom_point(size = 0.3, alpha = 0.3) +
-  geom_smooth(method = "loess", se = TRUE, size = 0.75, color = "black") +
-  facet_grid(Gender~Age_Group) +
-  scale_color_manual(values = c("Male" = "steelblue", "Female" = "darkred")) +
-  scale_y_continuous(limits = c(0, 300)) +
-  labs(title = "Figure S5: The Impact of Ozone on Marathon Performance by Age and Gender", 
-    x = "Ozone (ppb)", y = "Percent off current course record") +
-  theme_minimal() +
-  theme(legend.position = "none")
-```
-
-```{r, fig.height = 3.5, fig.width = 9}
-ggplot(merged_main %>% filter(Age >= 15), aes(x = PM2.5, y = X.CR, color = Gender)) +
-  geom_point(size = 0.3, alpha = 0.3) +
-  geom_smooth(method = "loess", se = TRUE, size = 0.75, color = "black") +
-  facet_grid(Gender~Age_Group) +
-  scale_color_manual(values = c("Male" = "steelblue", "Female" = "darkred")) +
-  scale_y_continuous(limits = c(0, 300)) +
-  labs(title = "Figure S6: The Impact of PM2.5 on Marathon Performance by Age and Gender", 
-    x = "PM2.5 (microgram/m^3)", y = "Percent off current course record") +
-  theme_minimal() +
-  theme(legend.position = "none")
-```
-
 ### Supplemental Spline plots for the impact of standardized environmental factors on general marathon performance
 
 ```{r, fig.width = 12, fig.height = 6}
@@ -1092,7 +912,7 @@ std_environ_factors = c("Wind_s", "WBGT_s", "SR_s", "X.rh_s",
                         "Ozone_s", "SO2_s", "NO2_s", "PM2.5_s")
 
 std_x_labels <- list(
-  "X.rh_s" = "% relative humidity",
+  "X.rh_s" = "% Relative Humidity",
   "Wind_s" = "Wind Speed",
   "WBGT_s" = "WBGT",
   "SR_s" = "SR",
