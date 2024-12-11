@@ -2,7 +2,7 @@
 title: "Optimal Allocation of Clusters and Observations Under Budget Constraints in Experimental Designs for Cluster Randomised Trials"
 subtitle: "PHP2550 Project 3: A simulation study"
 author: "Yanwei (Iris) Tong"
-date: "2024-11-12"
+date: "2024-11-12 (Revised 2024-12-10)"
 output: 
   pdf_document:
     latex_engine: xelatex

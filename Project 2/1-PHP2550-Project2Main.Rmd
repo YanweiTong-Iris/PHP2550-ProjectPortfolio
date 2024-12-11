@@ -2,7 +2,7 @@
 title: "Baseline Characteristics as Potential Moderators and Predictors of Smoking Cessation in Adults with Major Depressive Disorder"
 subtitle: "PHP2550 Project 2: A regression analysis"
 author: "Yanwei (Iris) Tong"
-date: "2024-10-10"
+date: "2024-10-10 (Revised 2024-12-10)"
 output: 
   pdf_document:
     latex_engine: xelatex
@@ -20,7 +20,7 @@ abstract: |
   
 
 geometry: margin=1in
-fontsize: 10.5pt
+fontsize: 11pt
 csl: 0-american-statistical-association.csl
 bibliography: 0-references.bib
 ---
