@@ -1,6 +1,6 @@
 # PHP2550 Project 2: A regression data analysis
 
-## Smoking cessation in adults with major depressive disorder (MDD)
+## Baseline Characteristics as Potential Moderators and Predictors of Smoking Cessation in Adults with Major Depressive Disorder
 
 ## Objectives
 
@@ -12,7 +12,7 @@ Building on a previous randomized, placebo-controlled study exploring factors in
 
 ## Methods
 
-We applied logistic regression to model the binary smoking abstinence outcome and implemented three selection methods to identify moderating and predictive variables: bidirectional stepwise selection using AIC, elastic net regression with cross-validation, and best subset selection with Mallow’s Cp criterion. Interaction terms were carefully incorporated, especially for factors hypothesized to moderate behavioral activation effects on abstinence. *Objective 1* included a comprehensive range of baseline variables and interaction terms with BA, while *Objective 2* focused solely on baseline predictors without interactions to assess their independent predictive effects. Calibration and discrimination metrics were used to evaluate model performance.           
+We applied logistic regression to model the binary smoking abstinence outcome and implemented three selection methods to identify moderating and predictive variables: ridge, lasso, and elastic net regression with cross-validation. Interaction terms were carefully incorporated, especially for factors hypothesized to moderate behavioral activation effects on abstinence. *Objective 1* included a comprehensive range of baseline variables and interaction terms with BA, while *Objective 2* focused solely on baseline predictors without interactions to assess their independent predictive effects. Calibration and discrimination metrics were used to evaluate model performance.           
 
 ## Results and conclusion
 
@@ -24,23 +24,21 @@ Our analysis identified several key baseline characteristics as potential modera
 
 **`0-references.bib`**: the article bibliography for the main report.
 
-**`1-model-selection.R**: contains preliminary and supplementary model selection testing that were not necessarily included in the main report.
+**`1-PHP2550-Project2Main.Rmd`**: the main report Rmarkdown.
 
-**`2-PHP2550-Project2Main.Rmd`**: the main report Rmarkdown.
-
-**`2-PHP2550-Project2Main.pdf`**: the knitted report as .pdf.
+**`1-PHP2550-Project2Main.pdf`**: the knitted report as .pdf.
 
 ## Dependencies
 
 The following packages were used in this analysis:
 
-1)  Data extraction, manipulation, and imputation: `tidyverse`, `MASS`, `mice`
+1)  Data extraction, manipulation, and imputation: `tidyverse`, `MASS`, `mice`, `naniar`
 
 2)  Table formatting: `gt`, `gtsummary`, `knitr`, `kableExtra`
 
 3)  Data visualization: `ggplot2`, `patchwork`, `grid`, `gridExtra`, `patchwork`,`naniar`, `pROC`, `RColorBrewer`, `cowplot`
 
-4)  Statistical analyses: `glmnet`, `bestglm`, `leaps`, `glmulti`
+4)  Statistical analyses: `glmnet`
 
 5)  Citations: `knitcitations`
 
