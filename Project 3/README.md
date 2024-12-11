@@ -1,5 +1,7 @@
 # PHP2550 Project 3: A simulation study
 
+## Optimal Allocation of Clusters and Observations Under Budget Constraints in Experimental Designs for Cluster Randomised Trials
+
 ## Objectives
 Our study aims to determine the optimal number of clusters ($G$) and observations per cluster ($R$) under a fixed budget ($B$) to maximize the efficiency of treatment effect estimates in a cluster randomized trial. The budget constraint includes a higher cost for the initial observation in each cluster ($c_1$) compared to subsequent observations ($c_2$, where $c_2 < c_1$), simulating a realistic cost structure in study designs. We conduct simulations to explore different parameter settings, including cost ratios ($c_1/c_2$), within-cluster and between-cluster variances, and outcome distributions (Normal vs. Poisson). The goal is to find the configuration that yields the most precise estimate of the treatment effect while maintaining an efficient use of resources.
   
@@ -23,6 +25,8 @@ The simulation results showed that the optimal $G$ and $R$ are influenced by the
 **`simulated_data`**: the sub-folder where the simulated data was stored.
 
 **`results`**: the sub-folder where the results were stored.
+
+**`Main_Fig_Table`**: the sub-folder containing the most important figures and tables to be presented in this README
 
 ## Dependencies
 

@@ -36,6 +36,8 @@ Although several environmental factors were statistically associated with perfor
 
 **`2-PHP2550-Project1Main.pdf`**: the knitted report as .pdf.
 
+**`Main_Fig_Table`**: the sub-folder containing the most important figures and tables to be presented in this README
+
 ## Dependencies
 
 The following packages were used in this analysis:
