@@ -888,7 +888,7 @@ Given the non-linear and non-normal distribution of marathon performance in rela
 
 ## Data Privacy and Code Availability
 
-Primary data were provided by Dr. Brett Romano Ely and Dr. Matthew Ely from the Department of Health Sciences at Providence College. The original data cannot be shared directly for privacy. Replication scripts are available at https://github.com/YanweiTong-Iris/PHP2550-Fall24/tree/main/Project1.
+Primary data were provided by Dr. Brett Romano Ely and Dr. Matthew Ely from the Department of Health Sciences at Providence College. The original data cannot be shared directly for privacy. Replication scripts are available at <https://github.com/YanweiTong-Iris/PHP2550-ProjectPortfolio/tree/main/Project%201>.
 
 # Reference
 <div id="refs"></div>

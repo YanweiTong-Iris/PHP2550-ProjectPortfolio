@@ -56,8 +56,8 @@ library(foreach)
 
 
 # Define data saving paths
-data_path = paste0(here::here(), "/Project3/simulated_data")
-result_path = paste0(here::here(), "/Project3/results")
+data_path = paste0(here::here(), "/Project 3/simulated_data")
+result_path = paste0(here::here(), "/Project 3/results")
 ```
 
 # \textcolor{orange}{INTRODUCTION}
@@ -526,7 +526,7 @@ Normal_combined_results <- foreach(i = 1:12, .combine = rbind, .packages = c("lm
 stopCluster(cl)
 ```
 
-Investigating **Figure 1** horizally presents the relationship between the variance of the beta estimate and $G$ for different cost scenarios, with a fixed budget of $B = 4000$, $c1/c2 = 5, 10, 20$ and an outcome distribution following a normal model ($Y \sim \text{Normal}$). The black line indicates the variance trend, while the orange point represents the configuration (combination of $G$ and $R$) with the minimum variance. Each panel corresponds to a different combination of $c_1$ and $c_2$, showing the overall trend of variance reduction as the number of clusters ($G$) changes, and indicating the optimal design configuration. In all panels, we observe that the variance of the $\hat{\beta}$ initially decreases as $G$ increases, reaches a minimum, and then either fluctuates or remains relatively stable as $G$ continues to increase.
+Investigating **Figure 1** horizontally presents the relationship between the variance of the beta estimate and $G$ for different cost scenarios, with a fixed budget of $B = 4000$, $c1/c2 = 5, 10, 20$ and an outcome distribution following a normal model ($Y \sim \text{Normal}$). The black line indicates the variance trend, while the orange point represents the configuration (combination of $G$ and $R$) with the minimum variance. Each panel corresponds to a different combination of $c_1$ and $c_2$, showing the overall trend of variance reduction as the number of clusters ($G$) changes, and indicating the optimal design configuration. In all panels, we observe that the variance of the $\hat{\beta}$ initially decreases as $G$ increases, reaches a minimum, and then either fluctuates or remains relatively stable as $G$ continues to increase.
 
 The optimal number of clusters that minimizes variance is influenced by the relative costs of adding clusters and adding observations within clusters. When the cost of adding observations within clusters ($c_2$) is high relative to the cost of adding clusters ($c_1$), the optimal configuration tends to favor more clusters ($G$) with fewer observations per cluster ($R$). Conversely, when the cost per observation ($c_2$) is reduced, adding more observations becomes less expensive, which may lead to a slightly lower number of clusters, though a higher number of clusters is still often preferred. Similarly, when the cost per cluster ($c_1$) is lower, the optimal design tends to favor more clusters, as the budget allows for a larger number of smaller clusters.
 
@@ -733,7 +733,7 @@ One limitation of this study is the computational constraint that prevented us f
 
 # Data and Code Availability
 
-This project is a collaboration with Dr. Zhijin Wu from the Department of Biostatistics at Brown University. Replication scripts and simulated data and results are available at <https://github.com/YanweiTong-Iris/PHP2550-Fall24/tree/main/Project3>.
+This project is a collaboration with Dr. Zhijin Wu from the Department of Biostatistics at Brown University. Replication scripts and simulated data and results are available at <https://github.com/YanweiTong-Iris/PHP2550-ProjectPortfolio/tree/main/Project%203>.
 
 # Reference
 <div id="refs"></div>

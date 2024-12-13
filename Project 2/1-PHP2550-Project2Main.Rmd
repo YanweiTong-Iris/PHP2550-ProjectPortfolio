@@ -1574,7 +1574,7 @@ Additionally, the predictor selection process was based solely on criteria like 
 
 # Consent, Data, and Code Availability
 
-Primary data were provided by Dr. George Papandonatos from the Department of Biostatistics at Brown University. The original data cannot be shared directly for privacy. Replication scripts are available at <https://github.com/YanweiTong-Iris/PHP2550-Fall24/tree/main/Project2>.
+Primary data were provided by Dr. George Papandonatos from the Department of Biostatistics at Brown University. The original data cannot be shared directly for privacy. Replication scripts are available at <https://github.com/YanweiTong-Iris/PHP2550-ProjectPortfolio/tree/main/Project%202>.
 
 # Reference
 <div id="refs"></div>
