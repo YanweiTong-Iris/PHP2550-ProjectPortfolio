@@ -10,6 +10,8 @@ Building on a previous randomized, placebo-controlled study exploring factors in
 
 2)  to evaluate baseline variables as predictors of abstinence outcomes, accounting for the effects of both behavioral treatments and pharmacotherapy.
 
+![](Main_Fig_Table/Table1.png)
+
 ## Methods
 
 Missing data was imputed with MICE. Then, for each imputed data set, we applied logistic regression to model the binary smoking abstinence outcome and implemented two selection methods to identify moderating and predictive variables: lasso and elastic net regression with 10-fold cross-validation. Interaction terms were carefully incorporated, especially for factors hypothesized to moderate behavioral activation effects on abstinence. *Objective 1* included a comprehensive range of baseline variables and interaction terms with BA, while *Objective 2* focused solely on baseline predictors without interactions to assess their independent predictive effects. Calibration and discrimination metrics were used to evaluate model performance.
@@ -18,9 +20,11 @@ Missing data was imputed with MICE. Then, for each imputed data set, we applied 
 
 Our analysis identified several key baseline characteristics as potential moderators and predictors for smoking cessation among individuals with MDD.
 
-Interactions between BA and Nicotine Metabolism Ratio (NMR) suggested nuanced influences on cessation, potentially acting as moderators of treatment effects. ![](Main_Fig_Table/Table4.png) ![](Main_Fig_Table/Figure2.png)
+Interactions between BA and Nicotine Metabolism Ratio (NMR) suggested nuanced influences on cessation, potentially acting as the moderator of treatment effects. ![](Main_Fig_Table/Table4.png) 
 
-For predictor effects, variables such as income level, race, FTCD score, and MDD history had certain impacts on odds of abstinence. In terms of model performance, Elastic Net achieved the best calibration metrics, with the lowest Brier score and calibration error, whereas bidirectional stepwise and best subset exhibited slightly higher AUC values, reflecting marginally better discrimination. ![](Main_Fig_Table/Table5.png)
+For predictor effects, variables such as income level, race, FTCD score, and MDD history had certain impacts on odds of abstinence. ![](Main_Fig_Table/Table5.png)
+
+In terms of model performance, both Elastic Net and Lasso exhibited relatively high AUC values and well-aligned calibration, reflecting overall good calibration and discrimination. ![](Main_Fig_Table/Figure2.png) 
 
 ## Directory Structure
 
