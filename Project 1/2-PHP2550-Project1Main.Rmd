@@ -148,9 +148,6 @@ CR_merged = merged_main  %>%
 age_grade_long <- agegrade_data %>%
   pivot_longer(cols = c(Female, Male), names_to = "Gender", values_to = "Grade_Factor")
 
-# View reshaped grade factors (optional)
-head(age_grade_long)
-
 # Merge the runners data with the grade factors
 merged_main <- merged_main %>%
   left_join(age_grade_long, by = c("Age", "Gender")) %>%
