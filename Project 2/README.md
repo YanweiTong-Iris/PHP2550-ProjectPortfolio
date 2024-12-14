@@ -12,7 +12,7 @@ Building on a previous randomized, placebo-controlled study exploring factors in
 
 ## Methods
 
-Missing data was imputed with MICE. Then, for each imputed data set, we applied logistic regression to model the binary smoking abstinence outcome and implemented three selection methods to identify moderating and predictive variables: lasso, and elastic net regression with 10-fold cross-validation. Interaction terms were carefully incorporated, especially for factors hypothesized to moderate behavioral activation effects on abstinence. *Objective 1* included a comprehensive range of baseline variables and interaction terms with BA, while *Objective 2* focused solely on baseline predictors without interactions to assess their independent predictive effects. Calibration and discrimination metrics were used to evaluate model performance.
+Missing data was imputed with MICE. Then, for each imputed data set, we applied logistic regression to model the binary smoking abstinence outcome and implemented two selection methods to identify moderating and predictive variables: lasso and elastic net regression with 10-fold cross-validation. Interaction terms were carefully incorporated, especially for factors hypothesized to moderate behavioral activation effects on abstinence. *Objective 1* included a comprehensive range of baseline variables and interaction terms with BA, while *Objective 2* focused solely on baseline predictors without interactions to assess their independent predictive effects. Calibration and discrimination metrics were used to evaluate model performance.
 
 ## Results and conclusion
 
@@ -36,7 +36,7 @@ For predictor effects, variables such as income level, race, FTCD score, and MDD
 
 The following packages were used in this analysis:
 
-1)  Data extraction, manipulation, and imputation: `tidyverse`, `MASS`, `mice`, `naniar`
+1)  Data extraction, manipulation, and imputation: `tidyverse`, `MASS`, `mice`, `naniar` , `caret`
 
 2)  Table formatting: `gt`, `gtsummary`, `knitr`, `kableExtra`
 
