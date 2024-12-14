@@ -20,11 +20,11 @@ Missing data was imputed with MICE. Then, for each imputed data set, we applied 
 
 Our analysis identified several key baseline characteristics as potential moderators and predictors for smoking cessation among individuals with MDD.
 
-Interactions between BA and Nicotine Metabolism Ratio (NMR) suggested nuanced influences on cessation, potentially acting as the moderator of treatment effects. ![](Main_Fig_Table/Table4.png) 
+Interactions between BA and Nicotine Metabolism Ratio (NMR) suggested nuanced influences on cessation, potentially acting as the moderator of treatment effects. ![](Main_Fig_Table/Table4.png)
 
 For predictor effects, variables such as income level, race, FTCD score, and MDD history had certain impacts on odds of abstinence. ![](Main_Fig_Table/Table5.png)
 
-In terms of model performance, both Elastic Net and Lasso exhibited relatively high AUC values and well-aligned calibration, reflecting overall good calibration and discrimination. ![](Main_Fig_Table/Figure2.png) 
+In terms of model performance, both Elastic Net and Lasso exhibited relatively high AUC values and well-aligned calibration, reflecting overall good calibration and discrimination. ![](Main_Fig_Table/Figure2.png)
 
 ## Directory Structure
 
