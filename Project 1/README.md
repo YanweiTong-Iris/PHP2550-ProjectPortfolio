@@ -20,9 +20,9 @@ LOESS plots, Spearman correlation test, GAM with a Gamma family, LM with log tra
 
 ## Results and conclusion
 
-Marathon performance exhibited a U-shaped relationship with age, where middle-aged runners (20-40 years old) performed best. This pattern was significantly modified by gender and moderately affected by WBGT Flag level. Environmental factors showed a relatively consistent impact between genders, but varied by age group. General runners aged 20–60 were relatively unaffected by environmental conditions, while younger and older runners showed greater sensitivity. ![](Main_Fig_Table/Figure4.png)
+Marathon performance exhibited a U-shaped relationship with age, where middle-aged runners (20-40 years old) performed best. This pattern was significantly modified by gender and age and moderately affected by WBGT Flag level. Environmental factors showed a relatively consistent impact between genders, but varied by age group. General runners aged 20–60 were relatively unaffected by environmental conditions, while younger and older runners showed greater sensitivity. ![](Main_Fig_Table/Figure4.png)
 
-Although several environmental factors were statistically associated with performance, no matter measured as % off course records and net race time for general runners, the variability explained by the environmental factors were small, indicating limited practical impact. This suggests that environmental conditions, while statistically significant, may play a minimal role in determining overall marathon performance. ![](Main_Fig_Table/Figure7.png) ![](Main_Fig_Table/Figure8.png) ![](Main_Fig_Table/Table4.png)
+Although several environmental factors were statistically associated with performance, no matter measured as % off course records and age-graded race time for general runners, the variability explained by the environmental factors were small, indicating limited practical impact. This suggests that environmental conditions, while statistically significant, may play a minimal role in determining overall marathon performance. ![](Main_Fig_Table/Figure7.png) ![](Main_Fig_Table/Figure8.png) ![](Main_Fig_Table/Table4.png)
 
 ## Directory Structure
 
