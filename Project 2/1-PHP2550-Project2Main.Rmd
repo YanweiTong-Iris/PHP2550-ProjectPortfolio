@@ -416,7 +416,7 @@ We performed the Little's MCAR test on the data, and it gave a $p-$value of ~0.2
 
 ```{r mice)}
 # Perform MICE imputation
-imputed_data <- mice(data, m = 5, method = "pmm", maxit = 50, seed = 2024,  printFlag = FALSE)
+imputed_data <- mice(data, m = 5, method = "pmm", maxit = 50, seed = 46,  printFlag = FALSE)
 ```
 
 
@@ -536,7 +536,7 @@ fit_models <- function(data) {
   
 
   # Split into train and test sets
-  set.seed(46)
+  set.seed(58)
   train_index <- createDataPartition(outcome, p = 0.7, list = FALSE)
   train_data <- data[train_index, ]
   train_outcome = train_data$abst
