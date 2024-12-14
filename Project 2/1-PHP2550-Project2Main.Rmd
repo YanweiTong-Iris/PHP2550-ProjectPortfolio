@@ -436,7 +436,8 @@ fit_models <- function(data) {
     as.matrix(train_data[, predictors]),
     train_data$abst,
     alpha = 0.5, # Mix of L1 and L2
-    family = "binomial"
+    family = "binomial",
+    nfold = 10
   )
 
   # Fit Lasso model (alpha = 1)
