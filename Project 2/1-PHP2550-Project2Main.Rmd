@@ -828,7 +828,7 @@ mean_roc_lasso <- data.frame(
 ROC_lasso = ggplot(mean_roc_lasso, aes(x = 1 - Specificity, y = Sensitivity)) +
   geom_line(color = "black", size = 1) +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "grey") +
-  annotate("text", x = 0.8, y = 0.2, label = paste("Mean AUC =", round(mean_auc_lasso, 2)), size = 5, color = "Black") +
+  annotate("text", x = 0.8, y = 0.2, label = paste("Mean AUC =", round(mean_auc_lasso, 2)), size = 3, color = "Black") +
   labs(
     x = "1 - Specificity",
     y = "Sensitivity"
@@ -859,7 +859,7 @@ mean_roc_enet <- data.frame(
 ROC_enet = ggplot(mean_roc_enet, aes(x = 1 - Specificity, y = Sensitivity)) +
   geom_line(color = "black", size = 1) +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "grey") +
-  annotate("text", x = 0.8, y = 0.2, label = paste("Mean AUC =", round(mean_auc_enet, 2)), size = 5, color = "Black") +
+  annotate("text", x = 0.8, y = 0.2, label = paste("Mean AUC =", round(mean_auc_enet, 2)), size = 3, color = "Black") +
   labs(
     x = "1 - Specificity",
     y = "Sensitivity"
@@ -1237,19 +1237,19 @@ for (i in 1:5) {
   test_data <- dataset[-train_index, ]
   
   # Prepare predictors and outcome for test set
-  test_variables_dummy <- model.matrix(~ 0 + ., data = test_data[, variable_names])
+  test_variables_dummy <- model.matrix(~ 0 + ., data = test_data[, predictor_names])
   test_variables_dummy <- test_variables_dummy[, -which(colnames(test_variables_dummy) == "Var0")]
   test_variables_dummy_full_interactions <- model.matrix(~ . ^ 2, data = as.data.frame(test_variables_dummy))
-  test_variables_dummy_include <- test_variables_dummy_full_interactions[, train_variables_dummy_include_names]
+  test_variables_dummy_include <- test_variables_dummy_full_interactions[, train_predictors_dummy_include_names]
   test_outcome <- test_data$abst
 
   # Predict probabilities for Elastic Net
-  predicted_prob_enet <- as.numeric(predict(aim1_results[[i]]$elastic_net,
+  predicted_prob_enet <- as.numeric(predict(aim2_results[[i]]$elastic_net,
                                             newx = as.matrix(test_variables_dummy_include),
                                             s = "lambda.min", type = "response"))
   
   # Predict probabilities for Lasso
-  predicted_prob_lasso <- as.numeric(predict(aim1_results[[i]]$lasso,
+  predicted_prob_lasso <- as.numeric(predict(aim2_results[[i]]$lasso,
                                              newx = as.matrix(test_variables_dummy_include),
                                              s = "lambda.min", type = "response"))
 
@@ -1336,7 +1336,7 @@ mean_roc_lasso <- data.frame(
 ROC_lasso = ggplot(mean_roc_lasso, aes(x = 1 - Specificity, y = Sensitivity)) +
   geom_line(color = "black", size = 1) +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "grey") +
-  annotate("text", x = 0.8, y = 0.2, label = paste("Mean AUC =", round(mean_auc_lasso, 2)), size = 5, color = "Black") +
+  annotate("text", x = 0.8, y = 0.2, label = paste("Mean AUC =", round(mean_auc_lasso, 2)), size = 3, color = "Black") +
   labs(
     x = "1 - Specificity",
     y = "Sensitivity"
@@ -1367,7 +1367,7 @@ mean_roc_enet <- data.frame(
 ROC_enet = ggplot(mean_roc_enet, aes(x = 1 - Specificity, y = Sensitivity)) +
   geom_line(color = "black", size = 1) +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "grey") +
-  annotate("text", x = 0.8, y = 0.2, label = paste("Mean AUC =", round(mean_auc_enet, 2)), size = 5, color = "Black") +
+  annotate("text", x = 0.8, y = 0.2, label = paste("Mean AUC =", round(mean_auc_enet, 2)), size = 3, color = "Black") +
   labs(
     x = "1 - Specificity",
     y = "Sensitivity"
